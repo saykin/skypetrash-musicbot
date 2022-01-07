@@ -28,4 +28,7 @@ test {
     useJUnitPlatform()
 }
 
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
+
 compileJava.options.encoding = 'UTF-8'
