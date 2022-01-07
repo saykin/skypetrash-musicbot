@@ -56,9 +56,9 @@ public class MusicBotListener extends ListenerAdapter {
         String[] command = event.getMessage().getContentRaw().split(" ", 2);
         String authorName = event.getMessage().getAuthor().getName();
         Guild guild = event.getGuild();
-        if (command[0].equals("!play") && command.length == 2) {
+        if (command[0].equalsIgnoreCase("!play") && command.length == 2) {
             loadAndPlay(guild, authorName, event.getChannel(), command[1]);
-        } else if (command[0].equals("!skip")) {
+        } else if (command[0].equalsIgnoreCase("!skip")) {
             skipTrack(event.getChannel());
         }
 
