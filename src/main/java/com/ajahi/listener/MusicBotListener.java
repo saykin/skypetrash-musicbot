@@ -59,7 +59,6 @@ public class MusicBotListener extends ListenerAdapter {
         if (command[0].equals("!play") && command.length == 2) {
             loadAndPlay(guild, authorName, event.getChannel(), command[1]);
         } else if (command[0].equals("!skip")) {
-            System.out.println("wut?");
             skipTrack(event.getChannel());
         }
 
@@ -110,7 +109,6 @@ public class MusicBotListener extends ListenerAdapter {
     }
 
     private void skipTrack(TextChannel channel) {
-        System.out.println("test2");
         MusicBotManager musicManager = getBotAudioPlayer(channel.getGuild());
         musicManager.scheduler.nextTrack();
 

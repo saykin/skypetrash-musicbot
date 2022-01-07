@@ -24,7 +24,6 @@ public class MusicBotTrackScheduler extends AudioEventAdapter {
     }
 
     public void nextTrack() {
-        System.out.println("test");
         player.startTrack(queue.poll(), false);
     }
 
