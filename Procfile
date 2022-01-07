@@ -1,1 +1,1 @@
-worker: java -jar build/libs/SkypeTrashMusicBot-1.0-SNAPSHOT.jar
+worker: java -jar musicbot-worker-1.0.jar
