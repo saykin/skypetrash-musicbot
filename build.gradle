@@ -30,13 +30,13 @@ test {
 
 
 
-task runApp(dependsOn: configurations.compileClasspath, type: JavaExec) {
+/*task runApp(dependsOn: configurations.compileClasspath, type: JavaExec) {
     group = "app"
     classpath = sourceSets.test.runtimeClasspath
     main(mainClassName)
-}
+}*/
 
-task stage(dependsOn: ['runApp','build', 'clean'])
+task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
 
 compileJava.options.encoding = 'UTF-8'
