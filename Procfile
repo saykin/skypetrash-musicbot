@@ -1,1 +1,1 @@
-worker: java $JAVA_OPTS -cp target/classes:target/dependency/* com.ajahi.MusicBotApp
+worker: java -jar build/libs/SkypeTrashMusicBot-1.0-SNAPSHOT-all.jar
