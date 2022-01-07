@@ -10,7 +10,7 @@ import javax.security.auth.login.LoginException;
 
 public class MusicBotApp {
     public static void main(String[] args) throws LoginException {
-        JDABuilder.createDefault(args[0])
+        JDABuilder.createDefault(System.getenv("API_TOKEN"))
                 .addEventListeners(new MusicBotListener())
                 .setActivity(Activity.listening("degenerate music"))
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
