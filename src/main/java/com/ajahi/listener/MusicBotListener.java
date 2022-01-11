@@ -49,7 +49,7 @@ public class MusicBotListener extends ListenerAdapter {
             musicBotManager = new MusicBotManager(playerManager);
             musicBotManagers.put(guildId, musicBotManager);
 
-            cleaner = new MusicBotMessageCleaner(guild.getTextChannelById(musicTextChannelId));
+            //cleaner = new MusicBotMessageCleaner(guild.getTextChannelById(musicTextChannelId));
         }
 
         guild.getAudioManager().setSendingHandler(musicBotManager.getSendHandler());
