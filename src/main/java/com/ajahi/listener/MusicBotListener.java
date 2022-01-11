@@ -102,12 +102,14 @@ public class MusicBotListener extends ListenerAdapter {
 
             @Override
             public void noMatches() {
-                channel.sendMessage("Nothing found by " + trackUrl).queue();
+                channel.delete().queueAfter(3, TimeUnit.SECONDS);
+                channel.sendMessage("Nothing found by " + trackUrl + ", deleting message").queue();
             }
 
             @Override
             public void loadFailed(FriendlyException exception) {
-                channel.sendMessage("Could not play: " + exception.getMessage()).queue();
+                channel.delete().queueAfter(3, TimeUnit.SECONDS);
+                channel.sendMessage("Could not play: " + exception.getMessage() + ", deleting message").queue();
             }
         });
     }
