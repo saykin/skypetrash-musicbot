@@ -19,6 +19,7 @@ public class MusicBotMessageCleaner {
         this.messages = new ArrayList<>();
         /*ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(this::deleteMessages, 0, 1, TimeUnit.DAYS);*/
+        deleteMessages();
     }
 
     private void deleteMessages() {
