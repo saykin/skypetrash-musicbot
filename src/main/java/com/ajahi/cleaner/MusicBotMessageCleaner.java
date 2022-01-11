@@ -24,8 +24,10 @@ public class MusicBotMessageCleaner {
     private void deleteMessages() {
         messages = findMessages();
         for (Message message : messages) {
+            System.out.println(message);
             if (message.getTimeCreated().minusWeeks(2).isBefore(OffsetDateTime.now())) {
                 message.delete().queue();
+                System.out.println("deleted");
             }
         }
 
