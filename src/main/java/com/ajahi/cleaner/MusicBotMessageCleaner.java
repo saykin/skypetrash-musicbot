@@ -17,8 +17,8 @@ public class MusicBotMessageCleaner {
     public MusicBotMessageCleaner(TextChannel musicTextChannel) {
         this.musicTextChannel = musicTextChannel;
         this.messages = new ArrayList<>();
-        /*ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(this::deleteMessages, 0, 1, TimeUnit.DAYS);*/
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(this::deleteMessages, 0, 1, TimeUnit.DAYS);
         deleteMessages();
     }
 
