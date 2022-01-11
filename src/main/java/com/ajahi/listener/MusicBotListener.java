@@ -60,6 +60,10 @@ public class MusicBotListener extends ListenerAdapter {
             loadAndPlay(guild, authorName, event.getChannel(), command[1]);
         } else if (command[0].equalsIgnoreCase("!skip")) {
             skipTrack(event.getChannel());
+        } else {
+            if (event.getMessage().getTextChannel().toString().equals("music")) {
+                event.getMessage().delete().queue();
+            }
         }
 
         super.onGuildMessageReceived(event);
