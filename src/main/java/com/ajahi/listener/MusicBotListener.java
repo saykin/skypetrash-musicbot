@@ -1,6 +1,7 @@
 package com.ajahi.listener;
 
 
+import com.ajahi.cleaner.MusicBotMessageCleaner;
 import com.ajahi.music.MusicBotManager;
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
@@ -16,6 +17,7 @@ import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.managers.AudioManager;
+import net.dv8tion.jda.internal.entities.TextChannelImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -27,10 +29,13 @@ public class MusicBotListener extends ListenerAdapter {
 
     private final AudioPlayerManager playerManager;
     private final Map<Long, MusicBotManager> musicBotManagers;
+    private final String musicTextChannelId;
+    private MusicBotMessageCleaner cleaner;
 
     public MusicBotListener() {
         this.musicBotManagers = new HashMap<>();
         this.playerManager = new DefaultAudioPlayerManager();
+        this.musicTextChannelId = "701187321453871144";
 
         AudioSourceManagers.registerRemoteSources(playerManager);
         AudioSourceManagers.registerLocalSource(playerManager);
@@ -43,6 +48,8 @@ public class MusicBotListener extends ListenerAdapter {
         if (musicBotManager == null) {
             musicBotManager = new MusicBotManager(playerManager);
             musicBotManagers.put(guildId, musicBotManager);
+
+            cleaner = new MusicBotMessageCleaner(guild.getTextChannelById(musicTextChannelId));
         }
 
         guild.getAudioManager().setSendingHandler(musicBotManager.getSendHandler());
@@ -62,8 +69,9 @@ public class MusicBotListener extends ListenerAdapter {
         } else if (command[0].equalsIgnoreCase("!skip")) {
             skipTrack(event.getChannel());
         } else {
-            if (event.getMessage().getTextChannel().getId().equals("701187321453871144")) {
-                event.getMessage().delete().queueAfter(5, TimeUnit.SECONDS);
+            if (event.getMessage().getTextChannel().getId().equals(musicTextChannelId)) {
+                event.getChannel().sendMessage("Your message didn't include !play or !skip, it will be deleted.").queue();
+                event.getMessage().delete().queueAfter(3, TimeUnit.SECONDS);
             }
         }
 
