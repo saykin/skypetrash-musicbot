@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class MusicBotListener extends ListenerAdapter {
 
@@ -61,8 +62,8 @@ public class MusicBotListener extends ListenerAdapter {
         } else if (command[0].equalsIgnoreCase("!skip")) {
             skipTrack(event.getChannel());
         } else {
-            if (event.getMessage().getTextChannel().toString().equals("music")) {
-                event.getMessage().delete().queue();
+            if (event.getMessage().getTextChannel().getId().equals("701187321453871144")) {
+                event.getMessage().delete().queueAfter(5, TimeUnit.SECONDS);
             }
         }
 
