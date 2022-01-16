@@ -68,6 +68,8 @@ public class MusicBotListener extends ListenerAdapter {
             loadAndPlay(guild, authorName, event.getChannel(), command[1]);
         } else if (command[0].equalsIgnoreCase("!skip")) {
             skipTrack(event.getChannel());
+        } else if (command[0].equalsIgnoreCase("!next")) {
+            //TODO: Add a function to go to next track in a playlist.
         } else {
             if (event.getMessage().getTextChannel().getId().equals(musicTextChannelId)) {
                 System.out.println(event.getAuthor().getName() + " " + event.getMessage().getContentRaw());
@@ -97,6 +99,7 @@ public class MusicBotListener extends ListenerAdapter {
                     firstTrack = playlist.getTracks().get(0);
                 }
                 channel.sendMessage("Adding to queue " + firstTrack.getInfo().title + " (first track of playlist " + playlist.getName() + ")").queue();
+                System.out.println(playlist.getTracks().size());
 
                 play(guild, authorName, musicManager, firstTrack);
             }
