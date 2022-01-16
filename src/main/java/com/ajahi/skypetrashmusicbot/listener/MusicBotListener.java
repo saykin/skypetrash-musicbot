@@ -122,7 +122,7 @@ public class MusicBotListener extends ListenerAdapter {
             emoteList.add("U+33U+fe0fU+20e3");
             int count = 0;
             for (YoutubeResult results : searchResults) {
-                channel.sendMessage(results.getVideoTitle() + " " + emoteList.get(count) + " " + results.getVideoThumbnail()).queue();
+                channel.sendMessage(results.getVideoTitle() + ":one: \n" + results.getVideoThumbnail()).queue();
                 count++;
             }
 
