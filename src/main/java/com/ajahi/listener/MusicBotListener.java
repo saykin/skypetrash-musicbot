@@ -88,17 +88,21 @@ public class MusicBotListener extends ListenerAdapter {
             @Override
             public void trackLoaded(AudioTrack track) {
                 channel.sendMessage("Adding to queue " + track.getInfo().title).queue();
-
                 play(guild, authorName, musicManager, track);
             }
 
             @Override
             public void playlistLoaded(AudioPlaylist playlist) {
+                for (AudioTrack track : playlist.getTracks()) {
+                    musicManager.scheduler.queue(track);
+                }
                 AudioTrack firstTrack = playlist.getSelectedTrack();
                 if (firstTrack == null) {
                     firstTrack = playlist.getTracks().get(0);
                 }
-                channel.sendMessage("Adding to queue " + firstTrack.getInfo().title + " (first track of playlist " + playlist.getName() + ")").queue();
+
+                //firstTrack.getInfo().title
+                channel.sendMessage("Adding to queue " + musicManager.player.getPlayingTrack().getInfo().title + " (first track of playlist " + playlist.getName() + ")").queue();
                 System.out.println(playlist.getTracks().size());
 
                 play(guild, authorName, musicManager, firstTrack);
