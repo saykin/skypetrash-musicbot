@@ -91,8 +91,6 @@ public class MusicBotListener extends ListenerAdapter {
         if (!searchResults.isEmpty()) {
             Guild guild = event.getGuild();
             String authorName = event.getUser().getName();
-            System.out.println(authorName);
-            System.out.println(event.getReactionEmote().getAsCodepoints());
             switch (event.getReactionEmote().getAsCodepoints()) {
                 case "U+31U+fe0fU+20e3":
                     youtubeUrl += searchResults.get(0).getVideoId();
@@ -101,7 +99,6 @@ public class MusicBotListener extends ListenerAdapter {
                 case "U+33U+fe0fU+20e3":
                     youtubeUrl += searchResults.get(2).getVideoId();
             }
-            System.out.println(youtubeUrl);
             loadAndPlay(guild, authorName, event.getChannel(), youtubeUrl);
         }
         super.onGuildMessageReactionAdd(event);
@@ -119,9 +116,14 @@ public class MusicBotListener extends ListenerAdapter {
                 e.printStackTrace();
             }
             channel.sendMessage("Top three results are as follows:").queue();
+            List<String> emoteList = new ArrayList<>();
+            emoteList.add("U+31U+fe0fU+20e3");
+            emoteList.add("U+32U+fe0fU+20e3");
+            emoteList.add("U+33U+fe0fU+20e3");
+            int count = 0;
             for (YoutubeResult results : searchResults) {
-                channel.sendMessage(results.getVideoTitle()).queue();
-                channel.sendMessage(results.getVideoThumbnail()).queue();
+                channel.sendMessage(results.getVideoTitle() + " " + emoteList.get(count) + " " + results.getVideoThumbnail()).queue();
+                count++;
             }
 
             channel.sendMessage("Use the react buttons to choose song").queue(message -> {
@@ -152,7 +154,7 @@ public class MusicBotListener extends ListenerAdapter {
                 //firstTrack.getInfo().title
                 channel.sendMessage("Adding to queue " + musicManager.player.getPlayingTrack().getInfo().title
                         + " (first track of playlist " + playlist.getName() + ")").queue();
-                System.out.println(playlist.getTracks().size());
+
 
                 play(guild, authorName, musicManager, firstTrack);
             }
