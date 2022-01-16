@@ -133,14 +133,18 @@ public class MusicBotListener extends ListenerAdapter {
 
     private void skipTrack(TextChannel channel) {
         MusicBotManager musicManager = getBotAudioPlayer(channel.getGuild());
-        musicManager.scheduler.nextTrack();
-        ;
+        try {
+            musicManager.scheduler.nextTrack();
+        } catch (NullPointerException e) {
+            channel.sendMessage("Nothing to skip, playlist is empty").queue();
+        }
         channel.sendMessage("Skipped to next track: " + musicManager.player.getPlayingTrack().getInfo().title).queue();
     }
 
     private void stopAllMusic(TextChannel channel) {
         MusicBotManager musicManager = getBotAudioPlayer(channel.getGuild());
-        musicManager.scheduler.onEvent();
+        musicManager.scheduler.emptyQueue();
+        musicManager.player.stopTrack();
 
         channel.sendMessage("Removing everything in the queue").queue();
     }

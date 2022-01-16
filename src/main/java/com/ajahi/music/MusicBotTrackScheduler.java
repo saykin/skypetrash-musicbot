@@ -35,10 +35,7 @@ public class MusicBotTrackScheduler extends AudioEventAdapter {
         }
     }
 
-    public void onEvent() {
-        for (AudioTrack q :
-                queue) {
-            queue.remove(q);
-        }
+    public void emptyQueue() {
+        queue.clear();
     }
 }
