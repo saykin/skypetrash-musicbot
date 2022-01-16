@@ -1,6 +1,6 @@
-package com.ajahi;
+package com.ajahi.skypetrashmusicbot;
 
-import com.ajahi.listener.MusicBotListener;
+import com.ajahi.skypetrashmusicbot.listener.MusicBotListener;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
