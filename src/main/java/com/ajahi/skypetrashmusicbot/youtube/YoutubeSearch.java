@@ -51,6 +51,7 @@ public class YoutubeSearch {
         SearchListResponse response = request.setKey(DEVELOPER_KEY)
                 .setMaxResults(3L)
                 .setQ(searchString)
+                .setType("playlist,video")
                 .setPrettyPrint(true)
                 .execute();
 
