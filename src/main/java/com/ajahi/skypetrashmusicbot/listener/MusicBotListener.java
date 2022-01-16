@@ -117,13 +117,12 @@ public class MusicBotListener extends ListenerAdapter {
             }
             channel.sendMessage("Top three results are as follows:").queue();
             List<String> emoteList = new ArrayList<>();
-            emoteList.add("U+31U+fe0fU+20e3");
-            emoteList.add("U+32U+fe0fU+20e3");
-            emoteList.add("U+33U+fe0fU+20e3");
+            emoteList.add(":one");
+            emoteList.add(":two");
+            emoteList.add(":three:");
             int count = 0;
             for (YoutubeResult results : searchResults) {
-                channel.sendMessage(results.getVideoTitle() + ":one: \n" + results.getVideoThumbnail()).queue();
-                count++;
+                channel.sendMessage(results.getVideoTitle() + " " + emoteList.get(count++) + "\n" + results.getVideoThumbnail()).queue();
             }
 
             channel.sendMessage("Use the react buttons to choose song").queue(message -> {
