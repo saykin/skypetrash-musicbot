@@ -68,12 +68,12 @@ public class MusicBotListener extends ListenerAdapter {
             loadAndPlay(guild, authorName, event.getChannel(), command[1]);
         } else if (command[0].equalsIgnoreCase("!skip")) {
             skipTrack(event.getChannel());
-        } else if (command[0].equalsIgnoreCase("!next")) {
-            //TODO: Add a function to go to next track in a playlist.
+        } else if (command[0].equalsIgnoreCase("!stop")) {
+            stopAllMusic(event.getChannel());
         } else {
             if (event.getMessage().getTextChannel().getId().equals(musicTextChannelId)) {
                 System.out.println(event.getAuthor().getName() + " " + event.getMessage().getContentRaw());
-                event.getChannel().sendMessage("Your message didn't include !play or !skip, it will be deleted.").queue();
+                event.getChannel().sendMessage("Your message didn't include !play, !skip or !stop, it will be deleted.").queue();
                 event.getMessage().delete().queueAfter(3, TimeUnit.SECONDS);
             }
         }
@@ -136,6 +136,13 @@ public class MusicBotListener extends ListenerAdapter {
         musicManager.scheduler.nextTrack();
 
         channel.sendMessage("Skipped to next track.").queue();
+    }
+
+    private void stopAllMusic(TextChannel channel) {
+        MusicBotManager musicManager = getBotAudioPlayer(channel.getGuild());
+        musicManager.scheduler.onEvent();
+
+        channel.sendMessage("Removing everything in the queue").queue();
     }
 
     private VoiceChannel getVoiceChannel(String authorName, List<VoiceChannel> channels, Guild guild) {

@@ -1,6 +1,7 @@
 package com.ajahi.music;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
+import com.sedmelluq.discord.lavaplayer.player.event.AudioEvent;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
@@ -31,6 +32,13 @@ public class MusicBotTrackScheduler extends AudioEventAdapter {
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         if(endReason.mayStartNext) {
             nextTrack();
+        }
+    }
+
+    public void onEvent() {
+        for (AudioTrack q :
+                queue) {
+            queue.remove(q);
         }
     }
 }
