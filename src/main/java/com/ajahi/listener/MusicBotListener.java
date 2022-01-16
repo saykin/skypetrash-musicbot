@@ -134,8 +134,8 @@ public class MusicBotListener extends ListenerAdapter {
     private void skipTrack(TextChannel channel) {
         MusicBotManager musicManager = getBotAudioPlayer(channel.getGuild());
         musicManager.scheduler.nextTrack();
-
-        channel.sendMessage("Skipped to next track.").queue();
+        ;
+        channel.sendMessage("Skipped to next track: " + musicManager.player.getPlayingTrack().getInfo().title).queue();
     }
 
     private void stopAllMusic(TextChannel channel) {
