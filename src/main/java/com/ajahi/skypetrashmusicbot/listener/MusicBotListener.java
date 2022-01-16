@@ -118,7 +118,7 @@ public class MusicBotListener extends ListenerAdapter {
             channel.sendMessage("Top three results are as follows:").queue();
             List<String> emoteList = new ArrayList<>();
             emoteList.add(":one");
-            emoteList.add(":two");
+            emoteList.add(":two:");
             emoteList.add(":three:");
             int count = 0;
             for (YoutubeResult results : searchResults) {
