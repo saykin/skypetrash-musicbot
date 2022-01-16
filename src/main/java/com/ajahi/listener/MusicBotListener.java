@@ -70,6 +70,7 @@ public class MusicBotListener extends ListenerAdapter {
             skipTrack(event.getChannel());
         } else {
             if (event.getMessage().getTextChannel().getId().equals(musicTextChannelId)) {
+                System.out.println(event.getAuthor().getName() + " " + event.getMessage().getContentRaw());
                 event.getChannel().sendMessage("Your message didn't include !play or !skip, it will be deleted.").queue();
                 event.getMessage().delete().queueAfter(3, TimeUnit.SECONDS);
             }
