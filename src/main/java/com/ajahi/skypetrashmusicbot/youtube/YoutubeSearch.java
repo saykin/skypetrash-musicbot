@@ -61,7 +61,7 @@ public class YoutubeSearch {
             String videoTitle = results.getSnippet().getTitle();
             if (videoTitle.contains("&quot;") || videoTitle.contains("&#39;"))
                 videoTitle = videoTitle.replaceAll("&quot;|&#39;", "\"");
-            String videoThumbnail = results.getSnippet().getThumbnails().getHigh().getUrl();
+            String videoThumbnail = results.getSnippet().getThumbnails().getMedium().getUrl();
             youtubeResults.add(new YoutubeResult(videoId, videoTitle, videoThumbnail));
         }
         return youtubeResults;
