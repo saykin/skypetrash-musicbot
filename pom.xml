@@ -77,7 +77,8 @@
                         <configuration>
                             <transformers>
                                 <!-- add Main-Class to manifest file -->
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>com.ajahi.MusicBotApp</mainClass>
                                 </transformer>
                             </transformers>
@@ -87,7 +88,6 @@
             </plugin>
         </plugins>
     </build>
-
 
 
 </project>
