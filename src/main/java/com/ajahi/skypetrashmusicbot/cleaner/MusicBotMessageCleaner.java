@@ -1,4 +1,4 @@
-package com.ajahi.cleaner;
+package com.ajahi.skypetrashmusicbot.cleaner;
 
 import net.dv8tion.jda.api.entities.*;
 
