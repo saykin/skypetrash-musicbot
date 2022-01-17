@@ -122,7 +122,8 @@ public class MusicBotListener extends ListenerAdapter {
             emoteList.add(":three:");
             int count = 0;
             for (YoutubeResult results : searchResults) {
-                channel.sendMessage(results.getVideoTitle() + " " + emoteList.get(count++) + "\n" + results.getVideoThumbnail()).queue();
+                channel.sendMessage(results.getVideoTitle() + " " + emoteList.get(count++)).queue();
+                channel.sendMessage(results.getVideoThumbnail()).queue();
             }
 
             channel.sendMessage("Use the react buttons to choose song").queue(message -> {
