@@ -3,7 +3,7 @@ Personal musicbot for our personal discord server, used JDA and Lava Player to m
 Check Lava Player for supported links and formats.
 
 This bot supports:
-1. !play \<link\>
+1. !play \<link\>/search string
 2. !skip (next song)
 3. !stop (purges queue and stops the music)
 4. YouTube playlist support.
