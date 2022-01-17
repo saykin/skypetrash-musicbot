@@ -1,5 +1,5 @@
 # skypetrash-musicbot, a Discord bot.
-Personal musicbot for our personal discord server, used JDA and Lava Player to make the bot.
+Personal musicbot for our personal discord server, used JDA and Lavaplayer to make the bot.
 Check Lava Player for supported links and formats.
 
 This bot supports:
