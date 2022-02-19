@@ -47,11 +47,11 @@ public class YoutubeSearch {
         YouTube youtubeService = getService();
         // Define and execute the API request
         YouTube.Search.List request = youtubeService.search()
-                .list("snippet");
+                .list(List.of("snippet"));
         SearchListResponse response = request.setKey(DEVELOPER_KEY)
                 .setMaxResults(3L)
                 .setQ(searchString)
-                .setType("playlist,video")
+                .setType(List.of("playlist,video"))
                 .setPrettyPrint(true)
                 .execute();
 
