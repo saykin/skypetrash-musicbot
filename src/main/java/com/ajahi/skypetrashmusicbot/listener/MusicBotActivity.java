@@ -22,8 +22,8 @@ public class MusicBotActivity implements Runnable {
     public void run() {
         try {
             disconnectBot();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException | NullPointerException e) {
+            System.err.println("Nullpointer LUL?");
         }
     }
 
