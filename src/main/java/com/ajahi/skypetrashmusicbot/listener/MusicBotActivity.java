@@ -20,17 +20,17 @@ public class MusicBotActivity implements Runnable {
 
     @Override
     public void run() {
-        try {
-            disconnectBot();
-        } catch (InterruptedException | NullPointerException e) {
-            System.err.println("Nullpointer LUL?");
-        }
+        disconnectBot();
     }
 
-    private void disconnectBot() throws InterruptedException {
+    private void disconnectBot() {
         if (isQueueEmpty()) {
-            Thread.sleep(300_000);
-            if (isQueueEmpty())
+            try {
+                Thread.sleep(300_000);
+            } catch (InterruptedException e) {
+                System.err.println("Something went wrong with the ");
+            }
+            if (isQueueEmpty() && Objects.requireNonNull(Objects.requireNonNull(guildId.getMemberById("928952274972209202")).getVoiceState()).inVoiceChannel())
                 guildId.moveVoiceMember(Objects.requireNonNull(guildId.getMemberById("928952274972209202")), null).queue();
             else
                 disconnectBot();
@@ -42,7 +42,7 @@ public class MusicBotActivity implements Runnable {
 
     private boolean isQueueEmpty() {
         if (!musicBotManagers.isEmpty())
-            return musicBotManagers.get(guildId).scheduler.isQueueEmpty();
+            return musicBotManagers.get(Long.parseLong(guildId.getId())).scheduler.isQueueEmpty();
         else
             return false;
     }
