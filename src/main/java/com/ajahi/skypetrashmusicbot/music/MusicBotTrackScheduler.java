@@ -38,4 +38,8 @@ public class MusicBotTrackScheduler extends AudioEventAdapter {
     public void emptyQueue() {
         queue.clear();
     }
+
+    public boolean isQueueEmpty() {
+        return queue.isEmpty();
+    }
 }

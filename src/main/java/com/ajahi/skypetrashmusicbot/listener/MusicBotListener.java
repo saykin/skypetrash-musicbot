@@ -1,7 +1,5 @@
 package com.ajahi.skypetrashmusicbot.listener;
 
-
-import com.ajahi.skypetrashmusicbot.cleaner.MusicBotMessageCleaner;
 import com.ajahi.skypetrashmusicbot.music.MusicBotManager;
 import com.ajahi.skypetrashmusicbot.youtube.YoutubeResult;
 import com.ajahi.skypetrashmusicbot.youtube.YoutubeSearch;
@@ -19,10 +17,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.managers.AudioManager;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class MusicBotListener extends ListenerAdapter {
@@ -30,7 +25,6 @@ public class MusicBotListener extends ListenerAdapter {
     private final AudioPlayerManager playerManager;
     private final Map<Long, MusicBotManager> musicBotManagers;
     private final String musicTextChannelId;
-    private MusicBotMessageCleaner cleaner;
     private List<YoutubeResult> searchResults;
 
     public MusicBotListener() {
@@ -49,18 +43,18 @@ public class MusicBotListener extends ListenerAdapter {
         if (musicBotManager == null) {
             musicBotManager = new MusicBotManager(playerManager);
             musicBotManagers.put(guildId, musicBotManager);
-
-            //cleaner = new MusicBotMessageCleaner(guild.getTextChannelById(musicTextChannelId));
         }
 
         guild.getAudioManager().setSendingHandler(musicBotManager.getSendHandler());
+        MusicBotActivity musicBotActivity = new MusicBotActivity(musicBotManagers, guild);
+        Thread t = new Thread(musicBotActivity);
+        t.start();
 
         return musicBotManager;
     }
 
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
-
         if (event.getAuthor().isBot()) return;
         String[] command = event.getMessage().getContentRaw().split(" ", 2);
         String authorName = event.getMessage().getAuthor().getName();
@@ -72,6 +66,7 @@ public class MusicBotListener extends ListenerAdapter {
             skipTrack(event.getChannel());
         } else if (command[0].equalsIgnoreCase("!stop")) {
             stopAllMusic(event.getChannel());
+            guild.moveVoiceMember(Objects.requireNonNull(guild.getMemberById("928952274972209202")), null).queueAfter(60, TimeUnit.SECONDS);
         } else {
             if (event.getMessage().getTextChannel().getId().equals(musicTextChannelId)) {
                 System.out.println(event.getAuthor().getName() + " " + event.getMessage().getContentRaw());
@@ -151,7 +146,6 @@ public class MusicBotListener extends ListenerAdapter {
                     firstTrack = playlist.getTracks().get(0);
                 }
 
-                //firstTrack.getInfo().title
                 channel.sendMessage("Adding to queue " + musicManager.player.getPlayingTrack().getInfo().title
                         + " (first track of playlist " + playlist.getName() + ")").queue();
 
