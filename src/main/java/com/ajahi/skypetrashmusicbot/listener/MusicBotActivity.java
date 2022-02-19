@@ -41,6 +41,9 @@ public class MusicBotActivity implements Runnable {
     }
 
     private boolean isQueueEmpty() {
-        return musicBotManagers.get(guildId).scheduler.isQueueEmpty();
+        if (!musicBotManagers.isEmpty())
+            return musicBotManagers.get(guildId).scheduler.isQueueEmpty();
+        else
+            return false;
     }
 }
